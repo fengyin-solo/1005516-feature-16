@@ -37,6 +37,7 @@
       <thead>
         <tr>
           <th v-for="column in columns" :key="column">{{ column }}</th>
+          <th>来源审计编号</th>
           <th>当前状态</th>
           <th>可执行动作</th>
         </tr>
@@ -44,6 +45,10 @@
       <tbody>
         <tr v-for="row in rows" :key="String(row.id)">
           <td v-for="column in columns" :key="column">{{ row[column] ?? '—' }}</td>
+          <td>
+            <span v-if="row.来源审计编号" class="from-audit">{{ row.来源审计编号 }}</span>
+            <span v-else>—</span>
+          </td>
           <td>{{ row.status }}</td>
           <td class="row-actions">
             <button
@@ -58,7 +63,7 @@
           </td>
         </tr>
         <tr v-if="!rows.length">
-          <td :colspan="columns.length + 2" class="empty-state">暂无人员培训数据，可先登记培训记录</td>
+          <td :colspan="columns.length + 3" class="empty-state">暂无人员培训数据，可先登记培训记录</td>
         </tr>
       </tbody>
     </table>
@@ -135,3 +140,14 @@ function reload() {
 
 onMounted(reload)
 </script>
+
+<style scoped>
+.from-audit {
+  background: #eff8ff;
+  color: #175cd3;
+  border-radius: 999px;
+  padding: 1px 8px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+</style>

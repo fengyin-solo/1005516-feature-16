@@ -2,7 +2,8 @@ import { SEED_ROWS } from './seed'
 import type { EntryRow } from './types'
 
 // 本地持久化：数据放在 localStorage 里，刷新、关掉再打开都还在。
-const STORAGE_KEY = 'pharma-cleanroom:entries'
+// 供应商审计改为专用台账口径（缺陷项数等不再是占位文本），键名带版本，旧版数据自动失效。
+const STORAGE_KEY = 'pharma-cleanroom:entries:v2'
 
 function clone<T>(value: T): T {
   return JSON.parse(JSON.stringify(value)) as T
